@@ -1,0 +1,10 @@
+{
+	"name": "minetest",
+	"url" : "https://github.com/ibilon/minetest-haxe-externs/",
+	"license": "MIT",
+	"tags": ["extern", "mod", "lua", "game"],
+	"description": "Externs for the Minetest game Lua modding API",
+	"version": "0.0.1",
+	"releasenote": "",
+	"contributors": ["_ibilon"]
+}
