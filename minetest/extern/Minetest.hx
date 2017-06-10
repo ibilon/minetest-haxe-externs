@@ -129,7 +129,7 @@ extern class Minetest
 	public static function get_craft_recipe (item:String) : { width:Int, method:String, item:Table<Int, String> };
 
 	//TODO: multireturn
-	public static function get_craft_result (input:{ method:String, width:Int, items:Table<Int, String> }) : ;
+	public static function get_craft_result (input:{ method:String, width:Int, items:Table<Int, String> }) : Void;
 
 	public static function get_current_modname () : String;
 
@@ -175,12 +175,12 @@ extern class Minetest
 
 	public static function get_password_hash (name:String, raw_password:String) : String;
 
-	public static function get_perlin (seeddiff:Int, octaves:Int, persistance:Float, scale:Int) : PerlinNose;
+	public static function get_perlin (seeddiff:Int, octaves:Int, persistance:Float, scale:Int) : PerlinNoise;
 
 	//TODO
-	public static function get_perlin_map () : ;
+	public static function get_perlin_map () : Void;
 
-	public static function get_player_by_name (playername:String) : PlayerObject;
+	public static function get_player_by_name (playername:String) : Player;
 
 	public static function get_player_information (playername:String) : { address:String, ip_version:Int, min_rtt:Float, max_rtt:Float, avg_rtt:Float, min_jitter:Float, max_jitter:Float, connection_uptime:Int };
 
@@ -189,10 +189,9 @@ extern class Minetest
 	public static function get_player_privs (name:String) : Table<String, Bool>;
 
 	//TODO
-	public static function get_player_radius_area () : ;
+	public static function get_player_radius_area () : Void;
 
-	//TODO: check type of pointed_thing
-	public static function get_pointed_thing_position (pointed_thing, above:Bool) : Position;
+	public static function get_pointed_thing_position (pointed_thing:PointedThing, above:Bool) : Position;
 
 	public static function get_position_from_hash (hash:Int) : Position;
 
@@ -211,13 +210,12 @@ extern class Minetest
 	public static function handle_node_drops (pos:Position, drops:Table<Int, String>, digger:ObjectRef) : Void;
 
 	//TODO: multi return
-	@:overload(function (arg:Table<String, Bool>) {})
-	public static function has_feature (arg:String) : ;
+	@:overload(function (arg:Table<String, Bool>) : Void {})
+	public static function has_feature (arg:String) : Void;
 
 	public static function hash_node_position (pos:Position) : Int;
 
-	//TODO: type of hud_definition, formspec string?
-	public static function hud_replace_builtin (name:String, hud_definition) : Void;
+	public static function hud_replace_builtin (name:String, hud_definition:String) : Void;
 
 	public static function inventorycube (img1:String, img2:String, img3:String) : String;
 
@@ -240,7 +238,7 @@ extern class Minetest
 	public static function kick_player (name:String, ?reason:String) : Void;
 
 	//TODO: multireturn
-	public static function line_of_sight (pos1:Position, pos2:Position; stepsize:Int=1) : ;
+	public static function line_of_sight (pos1:Position, pos2:Position, stepsize:Int=1) : Void;
 
 	public static function log (loglevel:String, ?line:String) : Void;
 
@@ -268,19 +266,19 @@ extern class Minetest
 	public static function punch_node (pos:Position) : Void;
 
 	//TODO
-	public static function raillike_group () : ;
+	public static function raillike_group () : Void;
 
 	public static function record_protection_violation (pos:Position, name:String) : Void;
 
-	public static function register_abm (abm_defintion_table:{ label:String, nodenames:Table<Int, String>, neighbors:Table<Int, String>, interbal:Float, chance:Float, catch_up!Bool, action:Position->Node->Int->Int->Void }) : Void;
+	public static function register_abm (abm_defintion_table:{ label:String, nodenames:Table<Int, String>, neighbors:Table<Int, String>, interbal:Float, chance:Float, catch_up:Bool, action:Position->Node->Int->Int->Void }) : Void;
 
 	public static function register_alias (name:String, convert_to:String) : Void;
 
 	//TODO
-	public static function register_authentication_handler () : ;
+	public static function register_authentication_handler () : Void;
 
 	//TODO: func return is multireturn
-	public static function register_chatcommand (cmd:String, chatcommand_defnition:{ params!String, description:String, ?privs:Table<String, Bool>, func:String->String->Bool }) : Void;
+	public static function register_chatcommand (cmd:String, chatcommand_defnition:{ params:String, description:String, ?privs:Table<String, Bool>, func:String->String->Bool }) : Void;
 
 	public static function register_craft (craft_recipe:CraftRecipe) : Void;
 
@@ -289,7 +287,7 @@ extern class Minetest
 	public static function register_craftitem (name:String, item_definition:{ description:String, groups:Table<Int, String>, inventory_image:String, wield_image:String, stack_max:Int, liquids_pointable:Bool, metadata:Any, on_place:ItemStack->ObjectRef->PointedThing->ItemStack, on_drop:ItemStack->ObjectRef->Position->ItemStack, on_use:ItemStack->Player->PointedThing->ItemStack }) : Void;
 
 	//TODO: schematic can be table
-	public static function register_decoration (decoration_definition:{ deco_type:String, place_on:String, sidelen:Int, fill_ratio:Float, noise_params:{ offset:Int, scale:Float, spread:Position }, seed:Int, octaves:Int, persist:Float }, biomes:Table<Int, String>, decoration:String, height:Int, height_max:Int, spawn_by:String, num_spawn_by:Int, schematic:String, replacements:Table<String, String>, flags:String, rotation:String }) : Void;
+	public static function register_decoration (decoration_definition:{ deco_type:String, place_on:String, sidelen:Int, fill_ratio:Float, noise_params:{ offset:Int, scale:Float, spread:Position, seed:Int, octaves:Int, persist:Float }, biomes:Table<Int, String>, decoration:String, height:Int, height_max:Int, spawn_by:String, num_spawn_by:Int, schematic:String, replacements:Table<String, String>, flags:String, rotation:String }) : Void;
 
 	public static function register_entity (entity_name:String, entity_definition:LuaEntityProperties) : Void;
 
@@ -305,14 +303,14 @@ extern class Minetest
 
 	public static function register_on_craft (fn:ItemStack->Player->Table<Int, Table<Int, String>>->InvRef->ItemStack) : Void;
 
-	public static function register_on_dieplayer (fn:ObjectRef->Bool) : ;
+	public static function register_on_dieplayer (fn:ObjectRef->Bool) : Void;
 
 	public static function register_on_dignode (fn:Position->Node->ObjectRef->Void) : Void;
 
 	public static function register_on_generated (fn:Position->Position->Int->Void) : Void;
 
 	//TODO: type of modifier
-	public static function register_on_player_hpchange (fn:Player->Int->Void, modifier) : Void;
+	public static function register_on_player_hpchange (fn:Player->Int->Void, modifier:Any) : Void;
 
 	public static function register_on_item_eat (fn:Int->?ItemStack->ItemStack->Player->PointedThing->Void) : Void;
 
@@ -324,7 +322,7 @@ extern class Minetest
 
 	public static function register_on_newplayer (fn:Player->Void) : Void;
 
-	public static function register_on_placenode (fn:Pos->Node->ObjectRef->Node->ItemStack->PointedThing->Bool) : Void;
+	public static function register_on_placenode (fn:Position->Node->ObjectRef->Node->ItemStack->PointedThing->Bool) : Void;
 
 	public static function register_on_player_receive_fields (fn:Player->String->Table<String, String>->Bool) : Void;
 
@@ -353,7 +351,7 @@ extern class Minetest
 	public static function rollback_get_node_actions (pos:Position, range:Int, seconds:Int, limit:Int) : Table<Int, { actor:String, pos:Position, time:Int, oldnode:Node, newnode:Node }>;
 
 	//TODO: maybe multireturn
-	public static function rollback_revert_actions_by (actor:String, seconds:Int) : ;
+	public static function rollback_revert_actions_by (actor:String, seconds:Int) : Void;
 
 	public static function rotate_and_place (itemstack:ItemStack, placer:ObjectRef, pointed_thing:PointedThing, infinitestacks:Bool, ?orient_flags:{ invert_wall:Bool, force_wall:Bool, force_ceiling:Bool, force_floor:Bool, force_facedir:Bool }) : Void;
 
@@ -370,7 +368,7 @@ extern class Minetest
 	public static function set_node_level (pos:Position, level:Int=1) : Int;
 
 	//TODO
-	public static function set_noiseparam_defaults () : ;
+	public static function set_noiseparam_defaults () : Void;
 
 	public static function set_player_password (name:String, password_hash:String) : Void;
 
@@ -414,5 +412,5 @@ extern class Minetest
 	public static function unban_player_or_ip (name_or_ip:String) : Void;
 
 	//TODO: multireturn
-	public static function write_json (data:AnyTable, styled:Bool=false) : ;
+	public static function write_json (data:AnyTable, styled:Bool=false) : Void;
 }
