@@ -294,4 +294,125 @@ extern class Minetest
 	public static function register_entity (entity_name:String, entity_definition:LuaEntityProperties) : Void;
 
 	public static function register_globalstep (fn:Float->Void) : Void;
+
+	public static function register_lbm (lbm_definition_table:{ index:String, nodenames:Table<Int, String>, run_at_every_load:Bool, action:Position->Node->Void }) : Void;
+
+	public static function register_node (name:String, node_definition:NodeDefinition) : Void;
+
+	public static function register_on_chat_message (fn:String->String->Void) : Void;
+
+	public static function register_on_cheat (fn:ObjectRef->{ type:String }->Void) : Void;
+
+	public static function register_on_craft (fn:ItemStack->Player->Table<Int, Table<Int, String>>->InvRef->ItemStack) : Void;
+
+	public static function register_on_dieplayer (fn:ObjectRef->Bool) : ;
+
+	public static function register_on_dignode (fn:Position->Node->ObjectRef->Void) : Void;
+
+	public static function register_on_generated (fn:Position->Position->Int->Void) : Void;
+
+	//TODO: type of modifier
+	public static function register_on_player_hpchange (fn:Player->Int->Void, modifier) : Void;
+
+	public static function register_on_item_eat (fn:Int->?ItemStack->ItemStack->Player->PointedThing->Void) : Void;
+
+	public static function register_on_joinplayer (fn:Player->Void) : Void;
+
+	public static function register_on_leaveplayer (fn:ObjectRef->Void) : Void;
+
+	public static function register_on_mapgen_init (fn:MapGenParams->Void) : Void;
+
+	public static function register_on_newplayer (fn:Player->Void) : Void;
+
+	public static function register_on_placenode (fn:Pos->Node->ObjectRef->Node->ItemStack->PointedThing->Bool) : Void;
+
+	public static function register_on_player_receive_fields (fn:Player->String->Table<String, String>->Bool) : Void;
+
+	public static function register_on_prejoinplayer (fn:String->String->String) : Void;
+
+	public static function register_on_protection_violation (fn:Position->String->Void) : Void;
+
+	public static function register_on_punchnode (fn:Position->Node->ObjectRef->PointedThing->Void) : Void;
+
+	public static function register_on_respawnplayer (fn:ObjectRef->Bool) : Void;
+
+	public static function register_on_shutdown (fn:Void->Void) : Void;
+
+	public static function register_ore (ore_def:OreDefinition) : Void;
+
+	@:overload(function (name:String, privilege_definition:{ description:String, give_to_singleplayer:Bool }) : Void {})
+	public static function register_privilege (name:String, privilege_definition:String) : Void;
+
+	//TODO check tooldefinition
+	public static function register_tool (name:String, tool_definition:{ description:String, inventory_image:String, tool_capabilities:{ max_drop_level:Int, groupcaps:Table<String, { times:Table<Int, Float>, uses:Int, maxlevel:Int }> } }) : Void;
+
+	public static function remove_node (pos:Position) : Void;
+
+	public static function request_shutdown () : Void;
+
+	public static function rollback_get_node_actions (pos:Position, range:Int, seconds:Int, limit:Int) : Table<Int, { actor:String, pos:Position, time:Int, oldnode:Node, newnode:Node }>;
+
+	//TODO: maybe multireturn
+	public static function rollback_revert_actions_by (actor:String, seconds:Int) : ;
+
+	public static function rotate_and_place (itemstack:ItemStack, placer:ObjectRef, pointed_thing:PointedThing, infinitestacks:Bool, ?orient_flags:{ invert_wall:Bool, force_wall:Bool, force_ceiling:Bool, force_floor:Bool, force_facedir:Bool }) : Void;
+
+	public static function rotate_node (itemstack:ItemStack, placer:ObjectRef, pointed_thing:PointedThing) : Void;
+
+	public static function serialize (data:AnyTable) : String;
+
+	public static function set_gen_notify (flags:String) : Void;
+
+	public static function set_mapgen_params (mapgen_params:{ mgname:String, seed:Int, water_level:Int, flags:String }) : Void;
+
+	public static function set_node (pos:Position, node:{ name:String }) : Void;
+
+	public static function set_node_level (pos:Position, level:Int=1) : Int;
+
+	//TODO
+	public static function set_noiseparam_defaults () : ;
+
+	public static function set_player_password (name:String, password_hash:String) : Void;
+
+	public static function set_player_privs (name:String, privs:Table<String, Bool>) : Void;
+
+	public static function set_timeofday (timeofday:Float) : Void;
+
+	public static function setting_get (name:String) : String;
+
+	public static function setting_get_pos (name:String) : Position;
+
+	public static function setting_getbool (name:String) : Bool;
+
+	public static function setting_save () : Void;
+
+	public static function setting_set (name:String, value:String) : Void;
+
+	public static function setting_setbool (name:String, value:Bool) : Void;
+
+	public static function show_formspec (playername:String, formname:String, formspec:String) : Void;
+
+	public static function sound_play (simplesoundspec:{ gain:Float, max_hear_distance:Int, loop:Bool }, soundparameters:{ to_player:String, pos:Position, object:ObjectRef }) : SoundHandle;
+
+	public static function sound_stop (handle:SoundHandle) : Void;
+
+	//TODO: check item's type
+	public static function spawn_item (pos:Position, item:String) : ObjectRef;
+
+	public static function spawn_tree (pos:Position, tree:Treedef) : Void;
+
+	public static function splittext (text:String, charlimit:Int) : Table<Int, String>;
+
+	public static function string_to_pos (string:String) : Position;
+
+	public static function string_to_privs (string:String) : Table<String, Bool>;
+
+	public static function swap_node (pos:Position, node:{ name:String }) : Void;
+
+	public static function transforming_liquid_add (pos:Position) : Void;
+
+	public static function unban_player_or_ip (name_or_ip:String) : Void;
+
+	//TODO: multireturn
+	public static function write_json (data:AnyTable, styled:Bool=false) : ;
 }
