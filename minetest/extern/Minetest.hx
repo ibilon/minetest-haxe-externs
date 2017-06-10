@@ -220,4 +220,78 @@ extern class Minetest
 	public static function hud_replace_builtin (name:String, hud_definition) : Void;
 
 	public static function inventorycube (img1:String, img2:String, img3:String) : String;
+
+	public static function is_protected (pos:Position, playername:String) : Bool;
+
+	public static function is_singleplayer () : Bool;
+
+	public static function is_yes (arg:String) : Bool;
+
+	public static function item_drop (itemstack:ItemStack, dropper:Player, pos:Position) : Void;
+
+	public static function item_eat (hp_change:Int, ?replace_with_item:String) : Void;
+
+	public static function item_place (itemstack:ItemStack, placer:ObjectRef, pointed_thing:PointedThing, param2:Int) : Void;
+
+	public static function item_place_node (itemstack:ItemStack, placer:ObjectRef, pointed_thing:PointedThing, param2:Int) : Void;
+
+	public static function item_place_object (itemstack:ItemStack, placer:ObjectRef, pointed_thing:PointedThing) : Void;
+
+	public static function kick_player (name:String, ?reason:String) : Void;
+
+	//TODO: multireturn
+	public static function line_of_sight (pos1:Position, pos2:Position; stepsize:Int=1) : ;
+
+	public static function log (loglevel:String, ?line:String) : Void;
+
+	public static function node_dig (pos:Position, node:Node, digger:ObjectRef) : Void;
+
+	public static function node_punch (pos:Position, node:Node, player:ObjectRef, pointed_thing:PointedThing) : Void;
+
+	public static function notify_authentication_modified (?name:String) : Void;
+
+	//TODO: redefinition type
+	public static function override_item (name:String, redefinition:AnyTable) : Void;
+
+	public static function parse_json (string:String, ?nullvalue:Any) : AnyTable;
+
+	public static function place_node (pos:Position, node:String) : Void;
+
+	public static function place_schematic (pos:Position, schematic:String, ?rotation:String, replacements:Table<String, String>, force_placement:Bool) : Void;
+
+	public static function player_exists (name:String) : Bool;
+
+	public static function pos_to_string (pos:Position) : String;
+
+	public static function privs_to_string (privs:Table<String, Bool>) : String;
+
+	public static function punch_node (pos:Position) : Void;
+
+	//TODO
+	public static function raillike_group () : ;
+
+	public static function record_protection_violation (pos:Position, name:String) : Void;
+
+	public static function register_abm (abm_defintion_table:{ label:String, nodenames:Table<Int, String>, neighbors:Table<Int, String>, interbal:Float, chance:Float, catch_up!Bool, action:Position->Node->Int->Int->Void }) : Void;
+
+	public static function register_alias (name:String, convert_to:String) : Void;
+
+	//TODO
+	public static function register_authentication_handler () : ;
+
+	//TODO: func return is multireturn
+	public static function register_chatcommand (cmd:String, chatcommand_defnition:{ params!String, description:String, ?privs:Table<String, Bool>, func:String->String->Bool }) : Void;
+
+	public static function register_craft (craft_recipe:CraftRecipe) : Void;
+
+	public static function register_craft_predict (func:ItemStack->Player->CraftRecipe->InvRef->Void) : Void;
+
+	public static function register_craftitem (name:String, item_definition:{ description:String, groups:Table<Int, String>, inventory_image:String, wield_image:String, stack_max:Int, liquids_pointable:Bool, metadata:Any, on_place:ItemStack->ObjectRef->PointedThing->ItemStack, on_drop:ItemStack->ObjectRef->Position->ItemStack, on_use:ItemStack->Player->PointedThing->ItemStack }) : Void;
+
+	//TODO: schematic can be table
+	public static function register_decoration (decoration_definition:{ deco_type:String, place_on:String, sidelen:Int, fill_ratio:Float, noise_params:{ offset:Int, scale:Float, spread:Position }, seed:Int, octaves:Int, persist:Float }, biomes:Table<Int, String>, decoration:String, height:Int, height_max:Int, spawn_by:String, num_spawn_by:Int, schematic:String, replacements:Table<String, String>, flags:String, rotation:String }) : Void;
+
+	public static function register_entity (entity_name:String, entity_definition:LuaEntityProperties) : Void;
+
+	public static function register_globalstep (fn:Float->Void) : Void;
 }
